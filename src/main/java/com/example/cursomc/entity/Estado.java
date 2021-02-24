@@ -41,13 +41,14 @@ public class Estado implements Serializable {
         return nome;
     }
 
+    public List<Cidade> getCidades() {
+        return cidades;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public List<Cidade> getCidades() {
-        return cidades;
-    }
 
     @Override
     public boolean equals(Object o) {
