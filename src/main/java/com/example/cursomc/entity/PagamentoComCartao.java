@@ -2,6 +2,9 @@ package com.example.cursomc.entity;
 
 import com.example.cursomc.enums.EstadoPagamento;
 
+import javax.persistence.Entity;
+
+@Entity
 public class PagamentoComCartao extends Pagamento {
     private static final long serialVersionUID = 1L;
 
