@@ -4,6 +4,7 @@ import com.example.cursomc.dto.CategoriaDTO;
 import com.example.cursomc.entity.Categoria;
 import com.example.cursomc.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -62,5 +63,17 @@ public class CategoriaResource {
         List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
 
+    }
+
+    @RequestMapping(value = "/pagina", method = RequestMethod.GET)
+    public ResponseEntity<Page<CategoriaDTO>> encontrarPagina(@RequestParam(value="pagina", defaultValue = "0") Integer pagina,
+                                                              @RequestParam(value = "linhasPorPagina", defaultValue = "24") Integer linhasPorPagina,
+                                                              @RequestParam(value="ordernarPor", defaultValue = "nome") String ordernarPor,
+                                                              @RequestParam(value="direcao", defaultValue = "ASC") String direcao)
+    {
+        Page<Categoria> list = service.encontrarPagina(pagina, linhasPorPagina, ordernarPor, direcao);
+        Page<CategoriaDTO> listDto = list.map(obj -> new CategoriaDTO(obj));
+
+        return ResponseEntity.ok().body(listDto);
     }
 }
