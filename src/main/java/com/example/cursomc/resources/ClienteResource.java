@@ -1,7 +1,10 @@
 package com.example.cursomc.resources;
 
+import com.example.cursomc.dto.CategoriaDTO;
 import com.example.cursomc.dto.ClienteDTO;
 import com.example.cursomc.dto.ClienteDTO;
+import com.example.cursomc.dto.ClienteNewDTO;
+import com.example.cursomc.entity.Categoria;
 import com.example.cursomc.entity.Cliente;
 import com.example.cursomc.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,17 @@ public class ClienteResource {
         return ResponseEntity.ok().body(obj);
     }
 
+
+    @RequestMapping(method= RequestMethod.POST)
+    public ResponseEntity<Void> inserir(@Valid @RequestBody ClienteNewDTO objDto)
+    {
+        Cliente obj = service.fromDTO(objDto);
+        obj = service.inserir(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(obj.getId()).toUri();
+
+        return ResponseEntity.created(uri).build();
+    }
 
     @RequestMapping(value="/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> atualizar(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id){
