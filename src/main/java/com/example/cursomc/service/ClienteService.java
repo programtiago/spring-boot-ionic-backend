@@ -2,10 +2,7 @@ package com.example.cursomc.service;
 
 import com.example.cursomc.dto.ClienteDTO;
 import com.example.cursomc.dto.ClienteNewDTO;
-import com.example.cursomc.entity.Categoria;
-import com.example.cursomc.entity.Cidade;
-import com.example.cursomc.entity.Cliente;
-import com.example.cursomc.entity.Endereco;
+import com.example.cursomc.entity.*;
 import com.example.cursomc.enums.TipoCliente;
 import com.example.cursomc.repository.ClienteRepository;
 import com.example.cursomc.repository.EnderecoRepository;
@@ -112,6 +109,17 @@ public class ClienteService {
         newObj.setNome(obj.getNome());
         newObj.setEmail(obj.getEmail());
     }
+
+    /* A listagem de produtos que contém o texto do nome dado e que pertencem a pelo menos umas das categorias dadas
+    public Page<Produto> pesquisar(String nome, List<Integer> ids)
+    {
+
+    }
+
+     */
+
+
+
 
 
 

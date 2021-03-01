@@ -22,4 +22,12 @@ public class PedidoService {
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
     }
+
+    /* Um novo pedido a ser inserido na base de dados
+    public Pedido inserir(Pedido obj)
+    {
+
+    }
+
+     */
 }
