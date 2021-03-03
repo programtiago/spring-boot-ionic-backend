@@ -3,6 +3,7 @@ package com.example.cursomc.entity;
 import com.example.cursomc.enums.EstadoPagamento;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use= JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public abstract class Pagamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,12 +46,12 @@ public abstract class Pagamento implements Serializable {
         this.id = id;
     }
 
-    public Integer getEstado() {
-        return estado;
+    public EstadoPagamento getEstado() {
+        return EstadoPagamento.toEnum(estado);
     }
 
-    public void setEstado(Integer estado) {
-        this.estado = estado;
+    public void setEstado(EstadoPagamento estado) {
+        this.estado = estado.getCod();
     }
 
     public Pedido getPedido() {
