@@ -2,16 +2,19 @@ package com.example.cursomc.config;
 
 import com.example.cursomc.service.DBService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 
-//@Configuration
-//@Profile("test")
-public class TestConfig {
+@Configuration
+@Profile("dev")
+public class DevConfig {
+
+    @Value("${spring.jpa.hibernate.ddl-auto}")
+    private String strategy;
 
     @Autowired
     private DBService dbService;
@@ -19,6 +22,10 @@ public class TestConfig {
     @Bean
     public boolean instantiateDatabase() throws ParseException
     {
+        if (!"create".equals(strategy))
+        {
+            return false;
+        }
         dbService.instantiateTestDatabase();
         return true;
     }
